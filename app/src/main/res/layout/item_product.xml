@@ -16,7 +16,7 @@
             android:id="@+id/imageProduct"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:src="@color/blue_primary"/>
+            android:src="@color/blue_secondary"/>
 
         <LinearLayout
             android:padding="16dp"

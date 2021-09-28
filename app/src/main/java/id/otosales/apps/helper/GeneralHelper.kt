@@ -4,6 +4,8 @@ import android.app.ActionBar
 import android.content.Context
 import android.content.Intent
 import android.view.View
+import java.text.NumberFormat
+import java.util.*
 
 class GeneralHelper {
     companion object {
@@ -76,6 +78,10 @@ class GeneralHelper {
             for (i in view){
                 i.visibility = View.VISIBLE
             }
+        }
+
+        fun currency(data : Long) : String {
+            return NumberFormat.getInstance(Locale("ID", "ID")).format(data)
         }
     }
 }
