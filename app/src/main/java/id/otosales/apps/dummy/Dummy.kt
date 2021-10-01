@@ -1,6 +1,7 @@
 package id.otosales.apps.dummy
 
 import id.otosales.apps.dummy.product.Product
+import id.otosales.apps.dummy.product.color.Color
 
 class Dummy {
     companion object {
@@ -38,6 +39,16 @@ class Dummy {
             cities.add("Bandung")
 
             return cities
+        }
+
+        fun color() : ArrayList<Color>{
+            val colors = ArrayList<Color>()
+
+            colors.add(Color(1, "Hitam", "#000000"))
+            colors.add(Color(2, "Putih", "#FFFFFF"))
+            colors.add(Color(3, "Merah", "#FF0000"))
+
+            return colors
         }
     }
 }

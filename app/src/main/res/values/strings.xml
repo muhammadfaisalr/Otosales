@@ -26,4 +26,18 @@
     <string name="search_product">Cari Produk</string>
     <string name="select_location">Pilih Lokasi</string>
     <string name="set">Terapkan</string>
+    <string name="buy">Beli</string>
+    <string name="description">Deskripsi</string>
+    <string name="dummy_product_desc">2021 Toyota Avanza 1.3 G MPV Keunggulan Toyota Avanza 2010.\n\n“Keunggulan paling utama dari Toyota Avanza tahun 2010 adalah dia menganut sistem rear-wheel-drive (RWD). \n\n Di sisi lain, Toyota Avanza juga bukanlah mobil yang rewel sehingga perawatan bisa dilakukan dengan mudah. \n\n “Modelnya itu tak lekang oleh waktu.</string>
+    <string name="color_available">Warna Tersedia</string>
+    <string name="buy_now">Beli Sekarang</string>
+    <string name="specification">Spesifikasi</string>
+    <string name="cc">CC</string>
+    <string name="engine_type">Tipe Mesin</string>
+    <string name="max_torque">Torsi Maksimal</string>
+    <string name="transmission">Transmisi</string>
+    <string name="type">Tipe</string>
+    <string name="credit_simulation">Simulasi Kredit</string>
+    <string name="discussion">Diskusi</string>
+    <string name="review">Ulasan</string>
 </resources>

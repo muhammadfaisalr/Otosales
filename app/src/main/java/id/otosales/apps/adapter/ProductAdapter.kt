@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import id.otosales.apps.R
+import id.otosales.apps.activity.DetailActivity
 import id.otosales.apps.databinding.ItemProductBinding
 import id.otosales.apps.dummy.product.Product
 import id.otosales.apps.helper.FontHelper
@@ -16,8 +17,8 @@ import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ProductAdapter(var activity : AppCompatActivity, var products : ArrayList<Product>) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ProductAdapter(var activity : AppCompatActivity, private var products : ArrayList<Product>) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
         private lateinit var textTitle : TextView
         private lateinit var textPrice : TextView
@@ -35,8 +36,11 @@ class ProductAdapter(var activity : AppCompatActivity, var products : ArrayList<
 
             FontHelper.Lexend.medium(activity, this.textPrice)
             FontHelper.Lexend.regular(activity, this.textTitle)
-        }
 
+            itemView.setOnClickListener {
+                GeneralHelper.move(activity, DetailActivity::class.java, false)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -45,6 +49,7 @@ class ProductAdapter(var activity : AppCompatActivity, var products : ArrayList<
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = this.products[position]
+
         holder.bind(activity, product, position)
     }
 
