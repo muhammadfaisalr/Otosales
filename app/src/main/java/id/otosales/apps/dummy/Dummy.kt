@@ -1,5 +1,6 @@
 package id.otosales.apps.dummy
 
+import id.otosales.apps.dummy.article.Article
 import id.otosales.apps.dummy.product.Product
 import id.otosales.apps.dummy.product.color.Color
 
@@ -49,6 +50,16 @@ class Dummy {
             colors.add(Color(3, "Merah", "#FF0000"))
 
             return colors
+        }
+
+        fun article() : ArrayList<Article>{
+            val articles = ArrayList<Article>()
+
+            articles.add(Article(1, "Artikel A", "Artikel A Adalah Sebagai Berikut", "Artikel A adalah sebagai berikut yang dimana saya sudah semuanya"))
+            articles.add(Article(2, "Artikel B", "Artikel B Adalah Sebagai Berikut", "Artikel A adalah sebagai berikut yang dimana saya sudah semuanya"))
+            articles.add(Article(3, "Artikel C", "Artikel C Adalah Sebagai Berikut", "Artikel A adalah sebagai berikut yang dimana saya sudah semuanya"))
+
+            return articles
         }
     }
 }

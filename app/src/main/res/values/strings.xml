@@ -40,4 +40,8 @@
     <string name="credit_simulation">Simulasi Kredit</string>
     <string name="discussion">Diskusi</string>
     <string name="review">Ulasan</string>
+    <string name="select_type">Pilih Tipe</string>
+    <string name="order_summary">Rincian Pesanan</string>
+    <string name="transaction_id">ID Transaksi</string>
+    <string name="search_article">Cari Artikel</string>
 </resources>

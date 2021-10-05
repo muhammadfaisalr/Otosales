@@ -18,6 +18,7 @@ import id.otosales.apps.databinding.ActivityDetailBinding
 import id.otosales.apps.databinding.BehaviorProductBinding
 import id.otosales.apps.dummy.Dummy
 import id.otosales.apps.helper.FontHelper
+import id.otosales.apps.helper.GeneralHelper
 import id.otosales.apps.shortcut.Animations
 
 class DetailActivity : AppCompatActivity(), View.OnClickListener {
@@ -89,13 +90,19 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
             this.binding.textTitleType
         )
         FontHelper.Lexend.semiBold(this, this.textPrice)
+
+        this.binding.exfabBuy.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
+        if (v == this.binding.exfabBuy){
+            this.buy()
+        }
     }
 
     private fun buy() {
         // TODO: 9/28/2021 Simpan Ke Google Room Data Transaksi nya
+        GeneralHelper.move(this, OrderSummaryActivity::class.java, false)
     }
 
 

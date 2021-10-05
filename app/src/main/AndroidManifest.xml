@@ -11,7 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Otosales">
-        <activity android:name=".activity.DetailActivity"></activity>
+        <activity android:name=".activity.HistoryActivity"></activity>
+        <activity android:name=".activity.DetailArticleActivity" />
+        <activity android:name=".activity.ProfileActivity" />
+        <activity android:name=".activity.OrderSummaryActivity" />
+        <activity android:name=".activity.DetailActivity" />
         <activity android:name=".activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +26,7 @@
         <activity android:name=".activity.SignUpActivity" />
         <activity android:name=".activity.OtpActivity" />
         <activity android:name=".activity.InputPhoneNumberActivity" />
-        <activity android:name=".activity.WelcomeActivity"></activity>
+        <activity android:name=".activity.WelcomeActivity" />
         <activity android:name=".MainActivity" />
     </application>
 
