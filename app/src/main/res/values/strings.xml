@@ -44,4 +44,18 @@
     <string name="order_summary">Rincian Pesanan</string>
     <string name="transaction_id">ID Transaksi</string>
     <string name="search_article">Cari Artikel</string>
+    <string name="car">Mobil</string>
+    <string name="motorcycle">Motor</string>
+    <string name="dana_tunai">Dana Tunai</string>
+    <string name="your_location">Lokasi Kamu</string>
+    <string name="edit">Ubah</string>
+    <string name="edit_account">Edit Akun</string>
+    <string name="logout">Keluar</string>
+    <string name="choose_type">Pilih Tipe Kendaraan</string>
+    <string name="kredit">Kredit</string>
+    <string name="tunai">Tunai</string>
+    <string name="choose_tenor">Pilih Tenor</string>
+    <string name="total_price">Total Harga</string>
+    <string name="detail_price">Rincian Harga</string>
+    <string name="text_total_dp">Total Down Payment( DP )</string>
 </resources>

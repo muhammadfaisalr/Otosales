@@ -1,6 +1,7 @@
 package id.otosales.apps.helper
 
 import android.app.ActionBar
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.View
@@ -22,14 +23,11 @@ class GeneralHelper {
         }
 
         fun move(context: Context, dest: Class<*>, isForget: Boolean, vararg bundle: Any) {
-            //Bundle di separator dengan koma, untuk index yang ganjil maka dia key, index genap adalah value
+            /*Bundle di separator dengan koma,
+             untuk index yang ganjil maka dia key, index genap adalah value*/
             val intent = Intent(context, dest)
 
-            if (isForget) {
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                context.startActivity(intent)
-                return
-            }
+
 
 
             if (bundle.isNotEmpty()) {
@@ -64,24 +62,34 @@ class GeneralHelper {
                 }
 
             }
-
+            if (isForget) {
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                context.startActivity(intent)
+                return
+            }
             context.startActivity(intent)
         }
 
-        fun gone(vararg view : View){
-            for (i in view){
+        fun gone(vararg view: View) {
+            for (i in view) {
                 i.visibility = View.GONE
             }
         }
 
-        fun visible(vararg view : View){
-            for (i in view){
+        fun visible(vararg view: View) {
+            for (i in view) {
                 i.visibility = View.VISIBLE
             }
         }
 
-        fun currency(data : Long) : String {
+        fun currency(data: Long): String {
             return NumberFormat.getInstance(Locale("ID", "ID")).format(data)
+        }
+
+        fun makeClickable(listener : View.OnClickListener, vararg views : View){
+            for(view in views){
+                view.setOnClickListener(listener)
+            }
         }
     }
 }

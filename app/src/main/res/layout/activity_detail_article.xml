@@ -47,7 +47,7 @@
         <TextView
             android:id="@+id/textPublisher"
             android:drawablePadding="8dp"
-            android:drawableStart="@drawable/ic_round_person_24"
+            android:drawableStart="@drawable/ic_round_person_12"
             android:layout_alignParentEnd="true"
             android:layout_gravity="end"
             android:textSize="12sp"

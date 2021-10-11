@@ -15,17 +15,19 @@ import id.otosales.apps.helper.GeneralHelper
 
 class InputPhoneNumberActivity : AppCompatActivity(), View.OnClickListener {
 
-    private lateinit var binding : ActivityInputPhoneNumberBinding
+    private lateinit var binding: ActivityInputPhoneNumberBinding
 
-    private lateinit var textTitle : TextView
-    private lateinit var textSubtitle : TextView
-    private lateinit var textCountryCode : TextView
+    private lateinit var textTitle: TextView
+    private lateinit var textSubtitle: TextView
+    private lateinit var textCountryCode: TextView
 
-    private lateinit var buttonNext : MaterialButton
+    private lateinit var buttonNext: MaterialButton
 
-    private lateinit var inputPhoneNumber : TextInputEditText
+    private lateinit var inputPhoneNumber: TextInputEditText
 
-    private lateinit var imageBack : ImageView
+    private lateinit var imageBack: ImageView
+
+    private lateinit var mode: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,10 +35,15 @@ class InputPhoneNumberActivity : AppCompatActivity(), View.OnClickListener {
         this.supportActionBar!!.hide()
         super.setContentView(this.binding.root)
 
+        this.extract()
         this.init()
     }
 
-    private fun init(){
+    private fun extract() {
+        this.mode = this.intent.getStringExtra(Constant.Key.MODE)!!
+    }
+
+    private fun init() {
         this.textTitle = this.binding.textTitle
         this.textSubtitle = this.binding.textSubtitle
         this.textCountryCode = this.binding.textCountryCode
@@ -54,15 +61,15 @@ class InputPhoneNumberActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        if (v == this.buttonNext){
+        if (v == this.buttonNext) {
             this.next()
-        }else if (v == this.imageBack){
+        } else if (v == this.imageBack) {
             this.finish()
         }
     }
 
     private fun next() {
-        if (!this.inputPhoneNumber.text.isNullOrEmpty()){
+        if (!this.inputPhoneNumber.text.isNullOrEmpty()) {
             this.validate()
 
             this.processToSendOtp()
@@ -71,15 +78,26 @@ class InputPhoneNumberActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun processToSendOtp() {
         //Fungsi untuk proses send kode OTP dari Firebase
-        GeneralHelper.move(this, OtpActivity::class.java, false, Constant.Key.PHONE, this.inputPhoneNumber.text.toString())
+
+        val phone =this.inputPhoneNumber.text.toString()
+
+        GeneralHelper.move(
+            this,
+            OtpActivity::class.java,
+            false,
+            Constant.Key.PHONE,
+            phone,
+            Constant.Key.MODE,
+            this.mode
+        )
     }
 
     private fun validate() {
         val length = this.inputPhoneNumber.text!!.length
 
-        if (length < 10 || length > 13){
+        if (length < 10 || length > 13) {
             //throw Error, Karena Panjang Nomor Handphone Tidak Sesuai
-            this.inputPhoneNumber.error =  "Nomor Handphone tidak Valid. Silahkan Cek Kembali!"
+            this.inputPhoneNumber.error = "Nomor Handphone tidak Valid. Silahkan Cek Kembali!"
             return
         }
     }

@@ -11,4 +11,5 @@
     <color name="blue_primary_30">#4D2F80ED</color>
     <color name="blue_secondary">#26A9E0</color>
     <color name="inactive">#989898</color>
+    <color name="soft_red">#E57373</color>
 </resources>

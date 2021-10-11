@@ -27,6 +27,6 @@ class ProfileActivity : AppCompatActivity() {
         this.textPhone = this.binding.textPhone
 
         FontHelper.Lexend.medium(this, this.textName)
-        FontHelper.Lexend.regular(this, this.textPhone)
+        FontHelper.Lexend.regular(this, this.textPhone, this.binding.textEditAccount, this.binding.textLogout)
     }
 }

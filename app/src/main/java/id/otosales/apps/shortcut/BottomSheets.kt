@@ -1,4 +1,4 @@
-package id.otosales.apps.helper
+package id.otosales.apps.shortcut
 
 import androidx.appcompat.app.AppCompatActivity
 import id.otosales.apps.bottomsheet.SelectCityBottomSheetDialogFragment

@@ -6,7 +6,9 @@ import android.view.View
 import android.widget.TextView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
+import id.otosales.apps.Constant
 import id.otosales.apps.databinding.ActivityWelcomeBinding
+import id.otosales.apps.helper.FirebaseHelper
 import id.otosales.apps.helper.FontHelper
 import id.otosales.apps.helper.GeneralHelper
 
@@ -15,10 +17,10 @@ class WelcomeActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityWelcomeBinding
 
-    private lateinit var textSlogan : MaterialTextView
-    private lateinit var textSignIn : MaterialTextView
+    private lateinit var textSlogan: MaterialTextView
+    private lateinit var textSignIn: MaterialTextView
 
-    private lateinit var buttonSignUp : MaterialButton
+    private lateinit var buttonSignUp: MaterialButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +31,7 @@ class WelcomeActivity : AppCompatActivity(), View.OnClickListener {
         this.init()
     }
 
-    private fun init(){
+    private fun init() {
         this.textSlogan = this.binding.textSlogan
         this.textSignIn = this.binding.textSignIn
         this.buttonSignUp = this.binding.buttonSignUp
@@ -39,11 +41,26 @@ class WelcomeActivity : AppCompatActivity(), View.OnClickListener {
 
 
         this.buttonSignUp.setOnClickListener(this)
+        this.textSignIn.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
-        if (v == this.buttonSignUp){
-            GeneralHelper.move(this, InputPhoneNumberActivity::class.java, true)
+        if (v == this.buttonSignUp) {
+            GeneralHelper.move(
+                this,
+                InputPhoneNumberActivity::class.java,
+                false,
+                Constant.Key.MODE,
+                Constant.Mode.SIGN_UP
+            )
+        } else {
+            GeneralHelper.move(
+                this,
+                InputPhoneNumberActivity::class.java,
+                false,
+                Constant.Key.MODE,
+                Constant.Mode.SIGN_IN
+            )
         }
     }
 }

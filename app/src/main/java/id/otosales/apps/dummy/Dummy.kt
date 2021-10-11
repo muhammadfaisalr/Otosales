@@ -3,6 +3,7 @@ package id.otosales.apps.dummy
 import id.otosales.apps.dummy.article.Article
 import id.otosales.apps.dummy.product.Product
 import id.otosales.apps.dummy.product.color.Color
+import id.otosales.apps.dummy.type.Type
 
 class Dummy {
     companion object {
@@ -60,6 +61,27 @@ class Dummy {
             articles.add(Article(3, "Artikel C", "Artikel C Adalah Sebagai Berikut", "Artikel A adalah sebagai berikut yang dimana saya sudah semuanya"))
 
             return articles
+        }
+
+        fun tenor() : ArrayList<String>{
+            val tenors = ArrayList<String>()
+
+            tenors.add("1")
+            tenors.add("2")
+            tenors.add("3")
+            tenors.add("4")
+            tenors.add("5")
+
+            return tenors
+        }
+
+        fun type() : ArrayList<Type>{
+            val types = ArrayList<Type>()
+
+            types.add(Type("A/T Transmission", 198000000))
+            types.add(Type("M/T Transmission", 199000000))
+
+            return types
         }
     }
 }

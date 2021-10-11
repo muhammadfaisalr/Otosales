@@ -1,11 +1,15 @@
 package id.otosales.apps.activity
 
 import android.content.res.Resources
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.widget.TooltipCompat
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,15 +17,21 @@ import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.button.MaterialButtonToggleGroup
+import id.otosales.apps.R
+import id.otosales.apps.`interface`.OnTenorClick
 import id.otosales.apps.adapter.ColorAdapter
+import id.otosales.apps.adapter.TenorAdapter
 import id.otosales.apps.databinding.ActivityDetailBinding
 import id.otosales.apps.databinding.BehaviorProductBinding
 import id.otosales.apps.dummy.Dummy
 import id.otosales.apps.helper.FontHelper
 import id.otosales.apps.helper.GeneralHelper
 import id.otosales.apps.shortcut.Animations
+import id.otosales.apps.shortcut.BottomSheets
 
-class DetailActivity : AppCompatActivity(), View.OnClickListener {
+class DetailActivity : AppCompatActivity(), View.OnClickListener,
+    MaterialButtonToggleGroup.OnButtonCheckedListener, OnTenorClick {
 
     private lateinit var binding: ActivityDetailBinding
 
@@ -35,6 +45,11 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var textTransmission: TextView
     private lateinit var textType: TextView
     private lateinit var textDescription: TextView
+    private lateinit var textDp : TextView
+
+    private lateinit var spinnerType: AutoCompleteTextView
+
+    private lateinit var recyclerTenor: RecyclerView
 
     private lateinit var cardView: CardView
 
@@ -45,7 +60,33 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         super.setContentView(this.binding.root)
 
         this.init()
+        this.setup()
+        this.detect()
+    }
 
+    private fun detect() {
+        if (this.binding.toggleTunai.isChecked) {
+            GeneralHelper.gone(this.binding.layoutKredit)
+        } else {
+            GeneralHelper.visible(this.binding.layoutKredit)
+        }
+    }
+
+    private fun setup() {
+        this.recyclerTenor.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        this.recyclerTenor.adapter = TenorAdapter(this, this)
+
+        this.setupType()
+    }
+
+    private fun setupType() {
+        val types = ArrayList<String>()
+        for (i in Dummy.type()){
+            types.add(i.name!!)
+        }
+
+        val arrayAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, types)
+        this.spinnerType.setAdapter(arrayAdapter)
     }
 
     private fun init() {
@@ -59,16 +100,20 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         this.textTransmission = this.binding.textTransmission
         this.textType = this.binding.textType
         this.textDescription = this.binding.textDescription
+        this.textDp = this.binding.textDp
+        this.spinnerType = this.binding.spinnerType
+        this.recyclerTenor = this.binding.recyclerTenor
 
         this.cardView = this.binding.cardView
 
-        //Start Init for Behavior
+        FontHelper.Lexend.semiBold(this, this.textPrice)
 
         FontHelper.Lexend.medium(
             this,
             this.textTitle,
             this.textTitleSpecification,
             this.binding.textTitleCreditSimulation,
+            this.textDp,
             this.binding.textTitleDiscuss,
             this.binding.textTitleReview,
             this.binding.textTitleDescription
@@ -81,21 +126,51 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
             this.textEngineType,
             this.textMaxTorque,
             this.textTransmission,
-            this.binding.textTitleCC,
             this.textType,
             this.textDescription,
+            this.spinnerType,
+            this.binding.textTitleDp,
+            this.binding.textTitleCC,
             this.binding.textEngineTypeTitle,
             this.binding.textTitleMaxTorque,
             this.binding.textTitleTransmission,
             this.binding.textTitleType
         )
-        FontHelper.Lexend.semiBold(this, this.textPrice)
 
-        this.binding.exfabBuy.setOnClickListener(this)
+        GeneralHelper.makeClickable(this, this.binding.exfabBuy, this.textPrice)
+        this.binding.groupPayment.addOnButtonCheckedListener(this)
+    }
+
+    override fun OnClick(value: String, view: View) {
+        var index = 0
+        for (v in Dummy.tenor()) {
+            val card = this.recyclerTenor.layoutManager?.findViewByPosition(index)
+
+            if (card is CardView) {
+                card.setCardBackgroundColor(this.resources.getColor(R.color.browser_actions_bg_grey))
+
+                var text = card.getChildAt(0)
+
+                if (text is TextView) {
+                    text.setTextColor(this.resources.getColor(R.color.inactive))
+                }
+            }
+
+            index += 1
+        }
+
+        if (view is CardView) {
+            view.setCardBackgroundColor(this.resources.getColor(R.color.blue_primary))
+
+            var text = view.getChildAt(0)
+            if (text is TextView) {
+                text.setTextColor(this.resources.getColor(R.color.white))
+            }
+        }
     }
 
     override fun onClick(v: View?) {
-        if (v == this.binding.exfabBuy){
+        if (v == this.binding.exfabBuy) {
             this.buy()
         }
     }
@@ -108,5 +183,13 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun getScreenHeight(): Int {
         return Resources.getSystem().displayMetrics.heightPixels
+    }
+
+    override fun onButtonChecked(
+        group: MaterialButtonToggleGroup?,
+        checkedId: Int,
+        isChecked: Boolean
+    ) {
+        this.detect()
     }
 }

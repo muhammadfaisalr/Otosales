@@ -8,9 +8,9 @@ import com.google.android.material.textfield.TextInputEditText
 
 class FontHelper {
     companion object{
-        const val lexendRegularPath = "font/Lexend_Regular.ttf"
-        const val lexendMediumPath = "font/Lexend_Medium.ttf"
-        const val lexendSemiBoldPath = "font/Lexend_SemiBold.ttf"
+        private const val lexendRegularPath = "font/Lexend_Regular.ttf"
+        private const val lexendMediumPath = "font/Lexend_Medium.ttf"
+        private const val lexendSemiBoldPath = "font/Lexend_SemiBold.ttf"
     }
     class Lexend {
 

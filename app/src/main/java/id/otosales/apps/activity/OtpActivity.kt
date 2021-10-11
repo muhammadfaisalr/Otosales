@@ -19,6 +19,7 @@ import id.otosales.apps.R
 import id.otosales.apps.databinding.ActivityOtpBinding
 import id.otosales.apps.helper.FontHelper
 import id.otosales.apps.helper.GeneralHelper
+import id.otosales.apps.helper.StringHelper
 import java.util.concurrent.TimeUnit
 
 class OtpActivity : AppCompatActivity(), View.OnClickListener {
@@ -36,6 +37,7 @@ class OtpActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var phoneNumber : String
     private lateinit var storedOtpId: String
+    private lateinit var mode : String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +53,7 @@ class OtpActivity : AppCompatActivity(), View.OnClickListener {
     private fun extract() {
         //Dapatkan data yang dikirim dari activity sebelumnya
         this.phoneNumber = this.intent.getStringExtra(Constant.Key.PHONE)!!
+        this.mode = this.intent.getStringExtra(Constant.Key.MODE)!!
     }
 
     @SuppressLint("SetTextI18n")
@@ -75,7 +78,7 @@ class OtpActivity : AppCompatActivity(), View.OnClickListener {
     private fun processSendOtp() {
         //Process Untuk Send OTP
         this.phoneNumber = "+62$phoneNumber"
-        println("Send OTP Requested to Number : $phoneNumber")
+        println("Send OTP Requested to Number : $phoneNumber for $mode")
 
         this.auth.setLanguageCode("id")
 
@@ -112,7 +115,11 @@ class OtpActivity : AppCompatActivity(), View.OnClickListener {
             .addOnCompleteListener{task ->
                 if (task.isSuccessful){
                     // TODO: 9/25/2021 Hit ke DB Golang untuk Store Data nya
-                    GeneralHelper.move(this@OtpActivity, SignUpActivity::class.java, false)
+                        if (StringHelper.isEqual(this.mode, Constant.Mode.SIGN_UP)){
+                            GeneralHelper.move(this@OtpActivity, SignUpActivity::class.java, false)
+                        }else{
+                            GeneralHelper.move(this@OtpActivity, HomeActivity::class.java, true)
+                        }
                 }
             }
     }
