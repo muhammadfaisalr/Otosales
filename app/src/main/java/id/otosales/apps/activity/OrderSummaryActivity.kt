@@ -10,6 +10,8 @@ class OrderSummaryActivity : AppCompatActivity() {
 
     private lateinit var textType : TextView
     private lateinit var textPrice : TextView
+    private lateinit var textTenor : TextView
+    private lateinit var textValueTenor : TextView
     private lateinit var textIdTransaction : TextView
 
     private lateinit var binding : ActivityOrderSummaryBinding
@@ -25,11 +27,11 @@ class OrderSummaryActivity : AppCompatActivity() {
 
     private fun init(){
         this.textType = this.binding.textType
-        this.textPrice = this.binding.textPrice
+        this.textPrice = this.binding.textCash
         this.textIdTransaction = this.binding.textTransactionId
 
         FontHelper.Lexend.semiBold(this, this.binding.textTitle)
         FontHelper.Lexend.medium(this, this.binding.textTransactionId)
-        FontHelper.Lexend.regular(this, this.textType, this.textPrice, this.binding.textTitleType)
+        FontHelper.Lexend.regular(this, this.textType, this.textPrice, this.binding.textValueTenor, this.binding.textTitleType, this.binding.textTitleType2, this.binding.textTitleTenor, this.binding.textTitleTenor2)
     }
 }

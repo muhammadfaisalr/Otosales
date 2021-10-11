@@ -66,8 +66,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
 
     override fun onClick(v: View?) {
         if (v == this.floatingActionButton) {
-            Toast.makeText(this, this.bottomNavbar.selectedItemId.toString(), Toast.LENGTH_SHORT)
-                .show()
+            GeneralHelper.move(this, ListTransactionActivity::class.java, false)
         } else if (v == this.binding.circleImageView) {
             GeneralHelper.move(this, ProfileActivity::class.java, false)
         }
@@ -86,7 +85,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
             }
 
             else -> {
-                Toast.makeText(this, item.itemId, Toast.LENGTH_SHORT).show()
+                GeneralHelper.move(this, ListTransactionActivity::class.java, false)
             }
         }
         return false

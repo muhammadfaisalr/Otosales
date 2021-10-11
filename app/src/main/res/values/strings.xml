@@ -58,4 +58,10 @@
     <string name="total_price">Total Harga</string>
     <string name="detail_price">Rincian Harga</string>
     <string name="text_total_dp">Total Down Payment( DP )</string>
+    <string name="per_month">/ Bulan</string>
+    <string name="tenor">Tenor</string>
+    <string name="cash_price">Harga Cash Keras</string>
+    <string name="save_transaction">Simpan Transaksi</string>
+    <string name="empty_transaction_title">Transaksi Kamu Masih Kosong :(</string>
+    <string name="add_transaction">Tambah Transaksi</string>
 </resources>
