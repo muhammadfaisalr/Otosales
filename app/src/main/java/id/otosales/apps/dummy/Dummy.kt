@@ -1,6 +1,7 @@
 package id.otosales.apps.dummy
 
 import id.otosales.apps.dummy.article.Article
+import id.otosales.apps.dummy.bank.Bank
 import id.otosales.apps.dummy.product.Product
 import id.otosales.apps.dummy.product.color.Color
 import id.otosales.apps.dummy.type.Type

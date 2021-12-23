@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import com.google.android.material.button.MaterialButton
-import id.otosales.apps.R
 import id.otosales.apps.databinding.ActivityListTransactionBinding
 import id.otosales.apps.helper.FontHelper
 import id.otosales.apps.helper.GeneralHelper

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,90 +7,98 @@
     android:orientation="vertical"
     tools:context=".activity.DetailArticleActivity">
 
-    <ImageView
-        android:id="@+id/imageBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:src="@drawable/ic_back"/>
-
-    <ImageView
-        android:id="@+id/imageThumbnail"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:src="@color/blue_primary"/>
-
-    <TextView
-        android:id="@+id/textTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="Artikel A Akan Membantu Anda, Bagaimana Caranya?"
-        android:padding="16dp"
-        android:textColor="@color/black"/>
-
-    <RelativeLayout
-        android:paddingHorizontal="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textDate"
-            android:drawableStart="@drawable/ic_round_date_range_24"
-            android:drawablePadding="8dp"
-            android:textSize="12sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rabu, 19 Nov 2021"/>
-
-        <TextView
-            android:id="@+id/textPublisher"
-            android:drawablePadding="8dp"
-            android:drawableStart="@drawable/ic_round_person_12"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="end"
-            android:textSize="12sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Muhammad Faisal"/>
-
-    </RelativeLayout>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_margin="16dp"
-        android:src="@drawable/gap_dash"/>
-
-    <TextView
-        android:id="@+id/textDesc"
-        android:padding="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ini Meurpakan Deskripsi Panjang"
-        android:textColor="@color/inactive"/>
-
-    <RelativeLayout
-        android:layout_margin="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/imageLike"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_round_thumb_up_24"/>
+            android:id="@+id/imageBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:src="@drawable/ic_back" />
 
         <ImageView
-            android:layout_marginStart="16dp"
-            android:layout_toEndOf="@id/imageLike"
-            android:id="@+id/imageShare"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_baseline_share_24"/>
+            android:id="@+id/imageThumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:src="@color/blue_primary" />
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Artikel A Akan Membantu Anda, Bagaimana Caranya?"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
-</LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp">
+
+            <TextView
+                android:id="@+id/textDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_date_range_24"
+                android:drawablePadding="8dp"
+                android:text="Rabu, 19 Nov 2021"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/textPublisher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="end"
+                android:drawableStart="@drawable/ic_round_person_12"
+                android:drawablePadding="8dp"
+                android:text="Muhammad Faisal"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_margin="16dp"
+            android:src="@drawable/gap_dash" />
+
+        <TextView
+            android:id="@+id/textDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Ini Meurpakan Deskripsi Panjang"
+            android:textColor="@color/inactive" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
+
+
+            <ImageView
+                android:id="@+id/imageLike"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_round_thumb_up_24" />
+
+            <ImageView
+                android:id="@+id/imageShare"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_toEndOf="@id/imageLike"
+                android:src="@drawable/ic_baseline_share_24" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>

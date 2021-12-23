@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import id.otosales.apps.activity.DanaTunaiActivity
 import id.otosales.apps.adapter.ProductAdapter
 import id.otosales.apps.databinding.FragmentHomeBinding
 import id.otosales.apps.dummy.Dummy
@@ -92,9 +93,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
             this.binding.textTitleChange
         )
 
-        this.imageSearch.setOnClickListener(this)
-        this.imageClose.setOnClickListener(this)
-        this.binding.textTitleChange.setOnClickListener(this)
+        GeneralHelper.makeClickable(this, this.imageSearch, this.imageClose, this.binding.textTitleChange, this.binding.layoutDanaTunai)
     }
 
     override fun onClick(v: View?) {
@@ -104,6 +103,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
             this.openSearchBar()
         }else if (v == this.binding.textTitleChange){
             BottomSheets.selectLocation(requireActivity() as AppCompatActivity)
+        }else if (v == this.binding.layoutDanaTunai) {
+            GeneralHelper.move(requireContext(), DanaTunaiActivity::class.java, false)
         }
     }
 

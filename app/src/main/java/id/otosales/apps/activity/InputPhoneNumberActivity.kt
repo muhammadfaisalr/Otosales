@@ -40,7 +40,11 @@ class InputPhoneNumberActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun extract() {
-        this.mode = this.intent.getStringExtra(Constant.Key.MODE)!!
+        val bundle = GeneralHelper.getBundlingBefore(this)
+
+        if (bundle != null){
+            this.mode = bundle.getString(Constant.Key.MODE, "")
+        }
     }
 
     private fun init() {
@@ -79,16 +83,17 @@ class InputPhoneNumberActivity : AppCompatActivity(), View.OnClickListener {
     private fun processToSendOtp() {
         //Fungsi untuk proses send kode OTP dari Firebase
 
-        val phone =this.inputPhoneNumber.text.toString()
+        val phone = this.inputPhoneNumber.text.toString()
+
+        val bundle = Bundle()
+        bundle.putString(Constant.Key.PHONE, phone)
+        bundle.putString(Constant.Key.MODE, this.mode)
 
         GeneralHelper.move(
             this,
             OtpActivity::class.java,
-            false,
-            Constant.Key.PHONE,
-            phone,
-            Constant.Key.MODE,
-            this.mode
+            bundle,
+            false
         )
     }
 

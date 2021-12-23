@@ -20,25 +20,26 @@ import id.otosales.apps.databinding.ActivityOtpBinding
 import id.otosales.apps.helper.FontHelper
 import id.otosales.apps.helper.GeneralHelper
 import id.otosales.apps.helper.StringHelper
+import id.otosales.apps.ui.Loading
 import java.util.concurrent.TimeUnit
 
 class OtpActivity : AppCompatActivity(), View.OnClickListener {
 
-    private lateinit var binding : ActivityOtpBinding
+    private lateinit var binding: ActivityOtpBinding
 
-    private lateinit var textTitle : TextView
-    private lateinit var textSubtitle : TextView
+    private lateinit var textTitle: TextView
+    private lateinit var textSubtitle: TextView
 
-    private lateinit var inputOtp : TextInputEditText
+    private lateinit var inputOtp: TextInputEditText
 
-    private lateinit var buttonVerification : MaterialButton
+    private lateinit var buttonVerification: MaterialButton
 
-    private lateinit var auth : FirebaseAuth
+    private lateinit var auth: FirebaseAuth
 
-    private lateinit var phoneNumber : String
     private lateinit var storedOtpId: String
-    private lateinit var mode : String
+    private lateinit var mode: String
 
+    private lateinit var phoneNumber: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,14 +51,19 @@ class OtpActivity : AppCompatActivity(), View.OnClickListener {
         this.init()
         this.processSendOtp()
     }
+
     private fun extract() {
         //Dapatkan data yang dikirim dari activity sebelumnya
-        this.phoneNumber = this.intent.getStringExtra(Constant.Key.PHONE)!!
-        this.mode = this.intent.getStringExtra(Constant.Key.MODE)!!
+        val bundle = GeneralHelper.getBundlingBefore(this)
+
+        if (bundle != null) {
+            this.phoneNumber = bundle.getString(Constant.Key.PHONE, "")
+            this.mode = bundle.getString(Constant.Key.MODE, "")
+        }
     }
 
     @SuppressLint("SetTextI18n")
-    private fun init(){
+    private fun init() {
         this.textTitle = this.binding.textTitle
         this.textSubtitle = this.binding.textSubtitle
         this.inputOtp = this.binding.inputOtp
@@ -66,7 +72,10 @@ class OtpActivity : AppCompatActivity(), View.OnClickListener {
         this.auth = FirebaseAuth.getInstance()
 
 
-        this.textSubtitle.text = this.getString(R.string.we_was_send_your_verification_code_to_number) + " " + this.getString(R.string.prefix_id_code) + phoneNumber
+        this.textSubtitle.text =
+            this.getString(R.string.we_was_send_your_verification_code_to_number) + " " + this.getString(
+                R.string.prefix_id_code
+            ) + phoneNumber
 
         FontHelper.Lexend.semiBold(this, this.textTitle, this.inputOtp)
         FontHelper.Lexend.medium(this, this.textSubtitle)
@@ -77,15 +86,15 @@ class OtpActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun processSendOtp() {
         //Process Untuk Send OTP
-        this.phoneNumber = "+62$phoneNumber"
-        println("Send OTP Requested to Number : $phoneNumber for $mode")
+        val phone = "+62${this.phoneNumber}"
+        println("Send OTP Requested to Number : $phone for $mode")
 
         this.auth.setLanguageCode("id")
 
-        val callback = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
+        val callback = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onCodeSent(p0: String, p1: PhoneAuthProvider.ForceResendingToken) {
                 super.onCodeSent(p0, p1)
-                Log.d(OtpActivity::class.simpleName, "Otp Delivered to : $phoneNumber")
+                Log.d(OtpActivity::class.simpleName, "Otp Delivered to : $phone")
                 this@OtpActivity.storedOtpId = p0
             }
 
@@ -100,7 +109,7 @@ class OtpActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         val options = PhoneAuthOptions.newBuilder(this.auth)
-            .setPhoneNumber(phoneNumber)
+            .setPhoneNumber(phone)
             .setTimeout(60L, TimeUnit.SECONDS) //Code invalid dalam 1 menit
             .setActivity(this@OtpActivity)
             .setCallbacks(callback)
@@ -110,23 +119,28 @@ class OtpActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun signInWithCredential(p0: PhoneAuthCredential) {
-        // TODO: 9/25/2021 Tambahkan Loading
+
+        val loading = Loading(this)
+        loading.setCancelable(false)
+        loading.show()
+
         this.auth.signInWithCredential(p0)
-            .addOnCompleteListener{task ->
-                if (task.isSuccessful){
-                    // TODO: 9/25/2021 Hit ke DB Golang untuk Store Data nya
-                        if (StringHelper.isEqual(this.mode, Constant.Mode.SIGN_UP)){
-                            GeneralHelper.move(this@OtpActivity, SignUpActivity::class.java, false)
-                        }else{
-                            GeneralHelper.move(this@OtpActivity, HomeActivity::class.java, true)
-                        }
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    loading.dismiss()
+                    // TODO: 9/25/2021 Validasi ke Backend dlu.
+                    if (StringHelper.isEqual(this.mode, Constant.Mode.SIGN_UP)) {
+                        GeneralHelper.move(this@OtpActivity, SignUpActivity::class.java, GeneralHelper.getBundlingBefore(this)!!, false)
+                    } else {
+                        GeneralHelper.move(this@OtpActivity, HomeActivity::class.java, true)
+                    }
                 }
             }
     }
 
     override fun onClick(v: View?) {
-        if (v == this.buttonVerification){
-            if (TextUtils.isEmpty(this.inputOtp.text)){
+        if (v == this.buttonVerification) {
+            if (TextUtils.isEmpty(this.inputOtp.text)) {
                 this.inputOtp.error = "Kode OTP Tidak Valid."
                 return
             }

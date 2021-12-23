@@ -146,6 +146,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:foreground="?attr/selectableItemBackground"
+                android:id="@+id/layoutDanaTunai"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

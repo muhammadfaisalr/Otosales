@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.view.get
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.textview.MaterialTextView
 import id.otosales.apps.R
 import id.otosales.apps.databinding.FragmentSelectCityBottomSheetDialogBinding
-import id.otosales.apps.dummy.Dummy
+import id.otosales.apps.helper.DatabaseHelper
 import id.otosales.apps.helper.FontHelper
 
 
@@ -45,31 +45,28 @@ class SelectCityBottomSheetDialogFragment : BottomSheetDialogFragment(), View.On
     }
 
     private fun setup() {
+
         val provinceAdapter = ArrayAdapter(
             requireActivity(),
             R.layout.support_simple_spinner_dropdown_item,
-            Dummy.province()
+            DatabaseHelper.daoProvince(requireContext()).getAllByName()
         )
         this.inputProvince.setAdapter(provinceAdapter)
         this.inputProvince.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
-                //Dapatkan nama provinsi berdasarkan index pada array yang di insert ke spinner
-                var index = 0
-                for (i in Dummy.province()) {
-                    if (index == position) {
-                        province = i
-                        break
-                    }
-                    index += 1
-                }
+                //Get Province Name When Item Selected
+                val text = (view as MaterialTextView).text.toString()
+                val provinceId = DatabaseHelper.daoProvince(requireContext()).getId(text)
+
+                val cityAdapter = ArrayAdapter(
+                    requireActivity(),
+                    R.layout.support_simple_spinner_dropdown_item,
+                    DatabaseHelper.daoCity(requireContext()).getNameByProvinceId(provinceId)
+                )
+
+                this.inputCity.setAdapter(cityAdapter)
             }
 
-        val cityAdapter = ArrayAdapter(
-            requireActivity(),
-            R.layout.support_simple_spinner_dropdown_item,
-            Dummy.city()
-        )
-        this.inputCity.setAdapter(cityAdapter)
     }
 
     private fun init() {

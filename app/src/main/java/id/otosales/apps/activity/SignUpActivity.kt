@@ -4,11 +4,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import id.otosales.apps.Constant
+import id.otosales.apps.api.model.BaseResponse
+import id.otosales.apps.api.model.register.RegisterRequest
 import id.otosales.apps.databinding.ActivitySignUpBinding
+import id.otosales.apps.helper.ApiHelper
 import id.otosales.apps.helper.FontHelper
 import id.otosales.apps.helper.GeneralHelper
+import id.otosales.apps.helper.Logging
+import id.otosales.apps.ui.Loading
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.observers.DisposableObserver
+import retrofit2.Response
 
 class SignUpActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -27,7 +37,14 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
         this.supportActionBar?.hide()
         super.setContentView(this.binding.root)
 
+        this.extract()
         this.init()
+    }
+
+    private fun extract() {
+        val bundle = GeneralHelper.getBundlingBefore(this)
+
+        Logging.postD(bundle?.getString(Constant.Key.MODE, "Null")!!)
     }
 
     private fun init(){
@@ -44,8 +61,30 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
+        val loading = Loading(this)
+        loading.setCancelable(false)
+        loading.show()
+
         if (v == this.buttonFinish){
-            GeneralHelper.move(this, HomeActivity::class.java, true)
+            val registerRequest = RegisterRequest(phone = "6281287616776", name = "Muhammad Faisal", email = "muhammadfaisalr17@gmail.com")
+            CompositeDisposable().add(
+                ApiHelper
+                    .hitRegister(registerRequest)
+                    .subscribeWith(object : DisposableObserver<Response<BaseResponse>>() {
+                        override fun onNext(t: Response<BaseResponse>) {
+                            loading.dismiss()
+                        }
+
+                        override fun onError(e: Throwable) {
+                            loading.dismiss()
+                        }
+
+                        override fun onComplete() {
+                            loading.dismiss()
+                            GeneralHelper.move(this@SignUpActivity, HomeActivity::class.java, true)
+                        }
+                    })
+            )
         }
     }
 }

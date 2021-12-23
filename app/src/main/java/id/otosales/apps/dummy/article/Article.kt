@@ -1,5 +1,8 @@
 package id.otosales.apps.dummy.article
 
+import java.io.Serializable
+
+
 data class Article(
     var id : Long?,
     var title : String?,

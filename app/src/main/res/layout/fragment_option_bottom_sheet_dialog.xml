@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context=".bottomsheet.OptionBottomSheetDialogFragment">
+
+    <ImageView
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:src="@drawable/ic_questions"
+        android:layout_margin="8dp"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:text="Title"
+        android:id="@+id/textTitle"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:layout_marginHorizontal="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/dark_grey"
+        android:text="Description"
+        android:id="@+id/textDescription"
+        android:textAlignment="center"/>
+
+    <LinearLayout
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonNegative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            app:cornerRadius="128dp"
+            android:backgroundTint="@color/blue_primary_invert"
+            android:text="Negative Button"
+            android:textSize="12sp"
+            android:textColor="@color/blue_primary"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonPositive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            app:cornerRadius="128dp"
+            android:backgroundTint="@color/blue_primary"
+            android:textSize="12sp"
+            android:text="Positive Button"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+</LinearLayout>

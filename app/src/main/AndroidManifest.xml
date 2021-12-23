@@ -3,16 +3,53 @@
     package="id.otosales.apps">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
+        android:name=".OtosalesApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Otosales">
-        <activity android:name=".activity.ListTransactionActivity"></activity>
-        <activity android:name=".activity.SplashScreenActivity">
+        android:theme="@style/Theme.Otosales"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activity.PaymentFailedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.DetailProblemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ProblemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.BrandActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.CreditSimulationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.PersonalInformationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.VerificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.FavoriteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.PaymentSuccessActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.DanaTunaiActivity"
+            android:exported="false" />
+        <activity android:name=".activity.CheckingPaymentActivity" />
+        <activity android:name=".activity.ChoosePaymentActivity" />
+        <activity android:name=".activity.ListTransactionActivity" />
+        <activity
+            android:name=".activity.SplashScreenActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

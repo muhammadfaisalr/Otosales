@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import id.otosales.apps.R
-import id.otosales.apps.`interface`.OnTenorClick
+import id.otosales.apps.interfaces.OnTenorClick
 import id.otosales.apps.databinding.ItemTenorBinding
 import id.otosales.apps.dummy.Dummy
 import id.otosales.apps.helper.FontHelper
@@ -22,7 +22,7 @@ class TenorAdapter(var activity : Activity, var callback : OnTenorClick) : Recyc
             FontHelper.Lexend.regular(activity, this.binding.textTenor)
 
             this.itemView.setOnClickListener{
-                callback.OnClick(Dummy.tenor()[position], this.itemView)
+                callback.OnItemInRecyclerClicked(Dummy.tenor()[position], this.itemView)
             }
         }
 

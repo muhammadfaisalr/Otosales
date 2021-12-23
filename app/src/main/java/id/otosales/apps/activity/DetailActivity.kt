@@ -1,33 +1,23 @@
 package id.otosales.apps.activity
 
 import android.content.res.Resources
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.widget.TooltipCompat
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.daimajia.androidanimations.library.Techniques
-import com.daimajia.androidanimations.library.YoYo
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 import id.otosales.apps.R
-import id.otosales.apps.`interface`.OnTenorClick
-import id.otosales.apps.adapter.ColorAdapter
+import id.otosales.apps.interfaces.OnTenorClick
 import id.otosales.apps.adapter.TenorAdapter
 import id.otosales.apps.databinding.ActivityDetailBinding
-import id.otosales.apps.databinding.BehaviorProductBinding
 import id.otosales.apps.dummy.Dummy
 import id.otosales.apps.helper.FontHelper
 import id.otosales.apps.helper.GeneralHelper
-import id.otosales.apps.shortcut.Animations
 import id.otosales.apps.shortcut.BottomSheets
 
 class DetailActivity : AppCompatActivity(), View.OnClickListener,
@@ -48,6 +38,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener,
     private lateinit var textDp : TextView
 
     private lateinit var spinnerType: AutoCompleteTextView
+    private lateinit var spinnerLeasing: AutoCompleteTextView
 
     private lateinit var recyclerTenor: RecyclerView
 
@@ -87,6 +78,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener,
 
         val arrayAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, types)
         this.spinnerType.setAdapter(arrayAdapter)
+
     }
 
     private fun init() {
@@ -137,11 +129,14 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener,
             this.binding.textTitleType
         )
 
-        GeneralHelper.makeClickable(this, this.binding.exfabBuy, this.textPrice)
         this.binding.groupPayment.addOnButtonCheckedListener(this)
+
+        GeneralHelper.makeClickable(this, this.binding.exfabBuy, this.textPrice, this.binding.linearDiscuss)
+        GeneralHelper.back(this, this.binding.imageBack)
     }
 
-    override fun OnClick(value: String, view: View) {
+    override fun OnItemInRecyclerClicked(value: String, view: View) {
+        //Jika Item pada Recyclerview di klik.
         var index = 0
         for (v in Dummy.tenor()) {
             val card = this.recyclerTenor.layoutManager?.findViewByPosition(index)
@@ -172,6 +167,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener,
     override fun onClick(v: View?) {
         if (v == this.binding.exfabBuy) {
             this.buy()
+        }else if (v == this.binding.linearDiscuss){
+            BottomSheets.discuss(activity = this, isCancelable = true)
         }
     }
 
