@@ -4,6 +4,7 @@ import id.otosales.apps.api.ApiServices
 import id.otosales.apps.api.model.BaseResponse
 import id.otosales.apps.api.model.article.ArticleResponse
 import id.otosales.apps.api.model.bank.BankResponse
+import id.otosales.apps.api.model.brand.BrandResponse
 import id.otosales.apps.api.model.city.CityResponse
 import id.otosales.apps.api.model.province.ProvinceResponse
 import id.otosales.apps.api.model.register.RegisterRequest
@@ -50,6 +51,13 @@ class ApiHelper {
         fun getArticle(): Observable<Response<ArticleResponse>> {
             return getServices()
                 .article()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+        }
+
+        fun getBrand(): Observable<Response<BrandResponse>> {
+            return getServices()
+                .brand()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
         }

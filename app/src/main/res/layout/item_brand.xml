@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:cardBackgroundColor="@color/blue_primary_invert"
+        app:cardCornerRadius="128dp"
+        android:layout_margin="8dp">
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/textShortCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="H"
+            android:layout_gravity="center"
+            android:textSize="24sp"
+            android:textColor="@color/blue_primary"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:layout_gravity="center"
+        android:id="@+id/textBrandName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="Bank BCA Digital"
+        android:textColor="@color/black"/>
+
+
+</LinearLayout>

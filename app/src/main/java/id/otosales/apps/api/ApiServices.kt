@@ -4,6 +4,7 @@ import id.otosales.apps.Constant
 import id.otosales.apps.api.model.BaseResponse
 import id.otosales.apps.api.model.article.ArticleResponse
 import id.otosales.apps.api.model.bank.BankResponse
+import id.otosales.apps.api.model.brand.BrandResponse
 import id.otosales.apps.api.model.city.CityResponse
 import id.otosales.apps.api.model.province.ProvinceResponse
 import id.otosales.apps.api.model.register.RegisterRequest
@@ -28,4 +29,7 @@ interface ApiServices {
 
     @GET(Constant.Url.ARTICLE)
     fun article(): Observable<Response<ArticleResponse>>
+
+    @GET(Constant.Url.BRAND)
+    fun brand(): Observable<Response<BrandResponse>>
 }

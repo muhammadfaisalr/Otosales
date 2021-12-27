@@ -108,4 +108,5 @@
     <string name="input_message">Masukkan Pesan</string>
     <string name="payment_failed">Pembayaran Gagal</string>
     <string name="reject_reason">Alasan Ditolak</string>
+    <string name="brand">Brand</string>
 </resources>

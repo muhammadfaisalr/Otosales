@@ -14,6 +14,14 @@ class Constant {
             const val PHONE = "PHONE"
             const val ARTICLE = "ARTICLE"
             const val MODE = "MODE"
+            const val CATEGORY = "CATEGORY"
+        }
+    }
+
+    class Value {
+        companion object {
+            const val CAR = "Mobil"
+            const val BIKE = "Motor"
         }
     }
 

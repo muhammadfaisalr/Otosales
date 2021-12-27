@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import id.otosales.apps.Constant
+import id.otosales.apps.activity.BrandActivity
 import id.otosales.apps.activity.DanaTunaiActivity
 import id.otosales.apps.adapter.ProductAdapter
 import id.otosales.apps.databinding.FragmentHomeBinding
@@ -93,18 +95,41 @@ class HomeFragment : Fragment(), View.OnClickListener {
             this.binding.textTitleChange
         )
 
-        GeneralHelper.makeClickable(this, this.imageSearch, this.imageClose, this.binding.textTitleChange, this.binding.layoutDanaTunai)
+        GeneralHelper.makeClickable(
+            this,
+            this.imageSearch,
+            this.imageClose,
+            this.binding.textTitleChange,
+            this.binding.layoutDanaTunai,
+            this.binding.layoutCarCategory,
+            this.binding.layoutBikeCategory
+        )
     }
 
     override fun onClick(v: View?) {
-        if (v == this.imageClose) {
-            this.closeSearchBar()
-        } else if (v == this.imageSearch) {
-            this.openSearchBar()
-        }else if (v == this.binding.textTitleChange){
-            BottomSheets.selectLocation(requireActivity() as AppCompatActivity)
-        }else if (v == this.binding.layoutDanaTunai) {
-            GeneralHelper.move(requireContext(), DanaTunaiActivity::class.java, false)
+        when (v) {
+            this.imageClose -> {
+                this.closeSearchBar()
+            }
+            this.imageSearch -> {
+                this.openSearchBar()
+            }
+            this.binding.textTitleChange -> {
+                BottomSheets.selectLocation(requireActivity() as AppCompatActivity)
+            }
+            this.binding.layoutDanaTunai -> {
+                GeneralHelper.move(requireContext(), DanaTunaiActivity::class.java, false)
+            }
+            this.binding.layoutCarCategory -> {
+                val bundle = Bundle()
+                bundle.putString(Constant.Key.CATEGORY, Constant.Value.CAR)
+                GeneralHelper.move(requireContext(), BrandActivity::class.java, bundle, false)
+            }
+            this.binding.layoutBikeCategory -> {
+                val bundle = Bundle()
+                bundle.putString(Constant.Key.CATEGORY, Constant.Value.BIKE)
+                GeneralHelper.move(requireContext(), BrandActivity::class.java, bundle, false)
+            }
         }
     }
 
